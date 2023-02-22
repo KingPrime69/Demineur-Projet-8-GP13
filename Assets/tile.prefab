@@ -100,6 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ca63bc67c8bac242a1665c66e1c62d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBomb: 0
   neutral: {fileID: 21300000, guid: 5e46f319bab4cbd45893ae251011af1e, type: 3}
   flag: {fileID: 21300000, guid: 83ca1b0b5df36f34186121d5219e6490, type: 3}
   bomb: {fileID: 21300000, guid: 86b8807ec847db34c8e15b2df118d863, type: 3}
@@ -121,7 +122,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 8218675199000242049}
         m_TargetAssemblyTypeName: tileBehaviour, Assembly-CSharp
-        m_MethodName: Clicked
+        m_MethodName: LeftClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -136,7 +137,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 8218675199000242049}
         m_TargetAssemblyTypeName: tileBehaviour, Assembly-CSharp
-        m_MethodName: Clicked
+        m_MethodName: RightClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

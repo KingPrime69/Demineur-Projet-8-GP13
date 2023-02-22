@@ -28,7 +28,8 @@ public class tileBehaviour : MonoBehaviour
     }
 
     public void LeftClicked () 
-    { 
+    {
+        if (spriteRenderer.sprite == flag) return;
         if (isBomb)
         {
             //gameOver
@@ -45,7 +46,8 @@ public class tileBehaviour : MonoBehaviour
 
     public void RightClick()
     {
-        spriteRenderer.sprite = flag;
+        if (spriteRenderer.sprite == flag) spriteRenderer.sprite = neutral;
+        else spriteRenderer.sprite = flag;
     }
 
     public void MiddleClick()
