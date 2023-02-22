@@ -14,7 +14,6 @@ public class ClickDetector : MonoBehaviour
 
     private void OnAction(InputValue _)
     {
-        Debug.Log("test");
         Clicked?.Invoke();
     }
 }
