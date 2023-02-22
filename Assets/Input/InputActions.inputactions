@@ -6,7 +6,7 @@
             "id": "53daf6ce-3b9c-4a0c-b8b3-bdacac9f27d4",
             "actions": [
                 {
-                    "name": "MouseClick",
+                    "name": "Action",
                     "type": "Button",
                     "id": "18846aaa-15d0-4e89-89b6-91d6e9c095a3",
                     "expectedControlType": "Button",
@@ -23,7 +23,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "MouseClick",
+                    "action": "Action",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

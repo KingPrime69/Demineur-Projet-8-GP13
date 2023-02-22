@@ -27,7 +27,7 @@ public class tileBehaviour : MonoBehaviour
         
     }
 
-    void Clicked () 
+    public void Clicked () 
     { 
         if (isBomb)
         {

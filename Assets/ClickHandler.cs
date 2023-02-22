@@ -17,6 +17,7 @@ public class ClickHandler : MonoBehaviour
 
     void MouseOnClicked()
     {
+        Debug.Log("test");
         _clicked?.Invoke();
     }
 }
