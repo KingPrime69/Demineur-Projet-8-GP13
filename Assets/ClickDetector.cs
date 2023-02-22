@@ -10,16 +10,22 @@ using UnityEngine.SocialPlatforms.Impl;
 public class ClickDetector : MonoBehaviour
 {
     public Vector2 WorldPosition { get; private set; }
-    public event Action Clicked;
-
+    public event Action LeftMouseClicked;
+    public event Action RightMouseClicked;
 
     void OnHover(InputValue value)
     {
+        Debug.Log("test");
         WorldPosition = Camera.main.ScreenToWorldPoint(value.Get<Vector2>());
     }
 
-    private void OnAction(InputValue _)
+    private void OnLeftMouseClick(InputValue _)
     {
-        Clicked?.Invoke();
+        LeftMouseClicked?.Invoke();
+    }
+
+    private void OnRightMouseClick(InputValue _)
+    {
+        RightMouseClicked?.Invoke();
     }
 }

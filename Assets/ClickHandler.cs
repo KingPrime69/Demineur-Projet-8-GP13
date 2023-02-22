@@ -6,7 +6,8 @@ using UnityEngine.InputSystem;
 
 public class ClickHandler : MonoBehaviour
 {
-    [SerializeField] UnityEvent _clicked;
+    [SerializeField] UnityEvent _leftclicked;
+    [SerializeField] UnityEvent _rightclicked;
     BoxCollider2D _collider;
     ClickDetector _mouse;
 
@@ -14,15 +15,22 @@ public class ClickHandler : MonoBehaviour
     {
         _collider= GetComponent<BoxCollider2D>();
         _mouse = FindObjectOfType<ClickDetector>();
-        _mouse.Clicked += MouseOnClicked;
+        _mouse.LeftMouseClicked += LeftMouseOnClicked;
+        _mouse.RightMouseClicked += RightMouseOnClicked;
     }
 
-    void MouseOnClicked()
+    void LeftMouseOnClicked()
     {
         if (_collider.bounds.Contains(_mouse.WorldPosition))
         {
-            Debug.Log(_mouse.WorldPosition);
-            _clicked?.Invoke();
+            _leftclicked?.Invoke();
+        }
+    }
+    void RightMouseOnClicked()
+    {
+        if (_collider.bounds.Contains(_mouse.WorldPosition))
+        {
+            _rightclicked?.Invoke();
         }
     }
 }

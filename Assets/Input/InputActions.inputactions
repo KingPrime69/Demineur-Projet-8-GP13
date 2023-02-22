@@ -6,7 +6,7 @@
             "id": "53daf6ce-3b9c-4a0c-b8b3-bdacac9f27d4",
             "actions": [
                 {
-                    "name": "Action",
+                    "name": "LeftMouseClick",
                     "type": "Button",
                     "id": "18846aaa-15d0-4e89-89b6-91d6e9c095a3",
                     "expectedControlType": "Button",
@@ -22,6 +22,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "RightMouseClick",
+                    "type": "Button",
+                    "id": "f30df4d1-1be6-4d46-828c-45b954b86ea6",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -32,7 +41,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Action",
+                    "action": "LeftMouseClick",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -44,6 +53,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Hover",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8c8f7bf4-0ce4-4343-ac99-d357827368cd",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RightMouseClick",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
