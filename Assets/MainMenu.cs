@@ -7,7 +7,11 @@ public class MainMenu : MonoBehaviour
 {
     public void PlayGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        Debug.Log("Switch to game");
+        SceneManager.LoadScene("Game");
+        Debug.Log("Game Scene loaded");
+        SceneManager.UnloadSceneAsync("MainMenu");
+        Debug.Log("MainMenu unloaded");
     }
 
     public void QuitGame()
