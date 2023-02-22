@@ -7,7 +7,7 @@ using UnityEngine.UIElements;
 
 public class tileBehaviour : MonoBehaviour
 {
-    bool isBomb;
+    public bool isBomb;
     int numberBombs;
 
     [SerializeField] Sprite neutral, flag ,bomb, clicked;
@@ -27,7 +27,7 @@ public class tileBehaviour : MonoBehaviour
         
     }
 
-    public void Clicked () 
+    public void LeftClicked () 
     { 
         if (isBomb)
         {
@@ -41,5 +41,15 @@ public class tileBehaviour : MonoBehaviour
                 txt.text = numberBombs.ToString();
             }
         }
+    }
+
+    public void RightClick()
+    {
+        spriteRenderer.sprite = flag;
+    }
+
+    public void MiddleClick()
+    {
+
     }
 }
