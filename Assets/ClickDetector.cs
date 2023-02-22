@@ -12,6 +12,12 @@ public class ClickDetector : MonoBehaviour
     public Vector2 WorldPosition { get; private set; }
     public event Action Clicked;
 
+
+    void OnHover(InputValue value)
+    {
+        WorldPosition = Camera.main.ScreenToWorldPoint(value.Get<Vector2>());
+    }
+
     private void OnAction(InputValue _)
     {
         Clicked?.Invoke();

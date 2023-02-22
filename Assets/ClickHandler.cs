@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 
 public class ClickHandler : MonoBehaviour
 {
@@ -20,7 +21,7 @@ public class ClickHandler : MonoBehaviour
     {
         if (_collider.bounds.Contains(_mouse.WorldPosition))
         {
-            Debug.Log("test");
+            Debug.Log(_mouse.WorldPosition);
             _clicked?.Invoke();
         }
     }
