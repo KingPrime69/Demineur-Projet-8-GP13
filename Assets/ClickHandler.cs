@@ -8,6 +8,7 @@ public class ClickHandler : MonoBehaviour
 {
     [SerializeField] UnityEvent _leftclicked;
     [SerializeField] UnityEvent _rightclicked;
+    [SerializeField] UnityEvent _middleclicked;
     BoxCollider2D _collider;
     ClickDetector _mouse;
 
@@ -17,6 +18,7 @@ public class ClickHandler : MonoBehaviour
         _mouse = FindObjectOfType<ClickDetector>();
         _mouse.LeftMouseClicked += LeftMouseOnClicked;
         _mouse.RightMouseClicked += RightMouseOnClicked;
+        _mouse.MiddleMouseClicked += MiddleMouseOnClicked;
     }
 
     void LeftMouseOnClicked()
@@ -31,6 +33,13 @@ public class ClickHandler : MonoBehaviour
         if (_collider.bounds.Contains(_mouse.WorldPosition))
         {
             _rightclicked?.Invoke();
+        }
+    }
+    void MiddleMouseOnClicked()
+    {
+        if (_collider.bounds.Contains(_mouse.WorldPosition))
+        {
+            _middleclicked?.Invoke();
         }
     }
 }

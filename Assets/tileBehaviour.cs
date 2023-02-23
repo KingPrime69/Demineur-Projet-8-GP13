@@ -9,6 +9,7 @@ public class tileBehaviour : MonoBehaviour
 {
     public bool isBomb;
     int numberBombs;
+    bool clickHover = false;
 
     [SerializeField] Sprite neutral, flag ,bomb, clicked;
     SpriteRenderer spriteRenderer;
@@ -48,11 +49,19 @@ public class tileBehaviour : MonoBehaviour
     public void RightClick()
     {
         if (spriteRenderer.sprite == flag) spriteRenderer.sprite = neutral;
-        else spriteRenderer.sprite = flag;
+        else if (spriteRenderer.sprite == neutral) spriteRenderer.sprite = flag;
     }
 
     public void MiddleClick()
     {
+        clickHover = false ? clickHover : !clickHover;
+
+        if (clickHover) spriteRenderer.color = Color.white;
+        else
+        {
+            spriteRenderer.color = new Color(100, 100, 100);
+            UnityEngine.Debug.Log(clickHover);
+        }
 
     }
 

@@ -41,7 +41,7 @@ public class SpawnerTile : MonoBehaviour
                     x = Random.Range(0, (int)_Size.x);
                     y = Random.Range(0, (int)_Size.y);
                 }
-                while (!array[x, y]);
+                while (array[x, y]);
                 array[x, y] = true;
             }
         }
