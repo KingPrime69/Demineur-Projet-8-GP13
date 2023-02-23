@@ -7,7 +7,7 @@ using UnityEngine.UIElements;
 
 public class tileBehaviour : MonoBehaviour
 {
-    public bool isBomb;
+    bool _isBomb;
     int numberBombs;
     bool clickHover = false;
 
@@ -22,16 +22,10 @@ public class tileBehaviour : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void LeftClicked () 
     {
         if (spriteRenderer.sprite == flag) return;
-        if (isBomb)
+        if (_isBomb)
         {
             //gameOver
             spriteRenderer.sprite = bomb;
@@ -57,16 +51,28 @@ public class tileBehaviour : MonoBehaviour
         clickHover = false ? clickHover : !clickHover;
 
         if (clickHover) spriteRenderer.color = Color.white;
-        else
-        {
-            spriteRenderer.color = new Color(100, 100, 100);
-            UnityEngine.Debug.Log(clickHover);
-        }
+        else spriteRenderer.color = new Color(168f / 255f, 168f / 255f, 168f / 255f);
 
     }
 
     public void SetBomb()
     {
-        isBomb = true;
+        _isBomb = true;
+    }
+
+    public void SetNbBombs(int x, int y, bool[,] array, Vector2 size)
+    {
+        for (int i = x - 1; i <= x + 1; i++)
+        {
+            for (int j = y - 1; j <= y + 1; j++)
+            {
+                if ((i != x || j != y) && (i >=0 && j >= 0) && (i < size.x && j < size.y))
+                {
+                    UnityEngine.Debug.Log(i +","+ j);
+                   if (array[i, j]) numberBombs++;
+                }
+            }
+        }
+        UnityEngine.Debug.Log("tile done");
     }
 }
