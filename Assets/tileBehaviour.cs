@@ -10,10 +10,12 @@ public class tileBehaviour : MonoBehaviour
     bool _isBomb;
     int numberBombs;
     bool clickHover = false;
+    public bool[,] array { get; set; }
 
     [SerializeField] Sprite neutral, flag ,bomb, clicked;
     SpriteRenderer spriteRenderer;
-    
+
+    Vector2 pos;
     TextMeshPro txt;
     // Start is called before the first frame update
     void Start()
@@ -60,19 +62,18 @@ public class tileBehaviour : MonoBehaviour
         _isBomb = true;
     }
 
-    public void SetNbBombs(int x, int y, bool[,] array, Vector2 size)
+    public void SetNbBombs(int x, int y, Vector2 size)
     {
+        pos.x= x; pos.y = y;
         for (int i = x - 1; i <= x + 1; i++)
         {
             for (int j = y - 1; j <= y + 1; j++)
             {
                 if ((i != x || j != y) && (i >=0 && j >= 0) && (i < size.x && j < size.y))
                 {
-                    UnityEngine.Debug.Log(i +","+ j);
                    if (array[i, j]) numberBombs++;
                 }
             }
         }
-        UnityEngine.Debug.Log("tile done");
     }
 }

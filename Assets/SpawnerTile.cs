@@ -11,11 +11,11 @@ public class SpawnerTile : MonoBehaviour
     [SerializeField] int _nbBombs;
     // Start is called before the first frame update
     public bool[,] array;
-
+    public GameObject[,] tileArray;
     void Start()
     {
-         array = new bool[(int)_Size.x, (int)_Size.y];
-
+        array = new bool[(int)_Size.x, (int)_Size.y];
+        tileArray = new GameObject[(int)_Size.x, (int)_Size.y];
         InitArray(array);
 
         for (int i = 0; i < _Size.x; i++)
@@ -25,9 +25,13 @@ public class SpawnerTile : MonoBehaviour
 
                 GameObject go = Instantiate(_original, new Vector3(i, y), Quaternion.identity);
                 if (array[i, y]) go.GetComponent<tileBehaviour>().SetBomb();
-                go.GetComponent<tileBehaviour>().SetNbBombs(i, y, array, _Size);
+                go.GetComponent<tileBehaviour>().array = array;
+                go.GetComponent<tileBehaviour>().SetNbBombs(i, y, _Size);
+
+                tileArray[i, y] = go;
             }
         }
+
     }
 
     void InitArray(bool[,] array)
