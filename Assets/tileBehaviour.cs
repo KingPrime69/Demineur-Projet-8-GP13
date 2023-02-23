@@ -33,6 +33,7 @@ public class tileBehaviour : MonoBehaviour
         if (isBomb)
         {
             //gameOver
+            spriteRenderer.sprite = bomb;
         }
         else 
         {
@@ -53,5 +54,10 @@ public class tileBehaviour : MonoBehaviour
     public void MiddleClick()
     {
 
+    }
+
+    public void SetBomb()
+    {
+        isBomb = true;
     }
 }

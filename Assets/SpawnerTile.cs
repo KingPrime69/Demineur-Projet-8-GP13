@@ -21,7 +21,9 @@ public class SpawnerTile : MonoBehaviour
         {
             for(int y = 0; y < _Size.y; y++)
             {
-                Instantiate(_original, new Vector3(i, y), Quaternion.identity);
+                
+                GameObject go = Instantiate(_original, new Vector3(i, y), Quaternion.identity);
+                if (array[i,y]) go.GetComponent<tileBehaviour>().SetBomb();
             }
         }
     }
