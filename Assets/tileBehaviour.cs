@@ -9,7 +9,7 @@ public class tileBehaviour : MonoBehaviour
 {
     bool _isBomb;
     int numberBombs;
-    bool clickHover = false;
+    bool clickOver = false;
     public bool[,] array { get; set; }
 
     [SerializeField] Sprite neutral, flag, bomb, clicked;
@@ -52,17 +52,22 @@ public class tileBehaviour : MonoBehaviour
         else if (spriteRenderer.sprite == neutral) spriteRenderer.sprite = flag;
     }
 
-    public void MiddleClick()
+    public void MiddleClickPress()
     {
-        clickHover = false ? clickHover : !clickHover;
+        // clickHover = false ? clickHover : !clickHover;
         foreach (GameObject go in Neighbours)
         {
-            if (clickHover) go.GetComponent<SpriteRenderer>().color = Color.white;
-            else go.GetComponent<SpriteRenderer>().color = new Color(168f / 255f, 168f / 255f, 168f / 255f);
+           go.GetComponent<SpriteRenderer>().color = Color.white;
+            // else go.GetComponent<SpriteRenderer>().color = new Color(168f / 255f, 168f / 255f, 168f / 255f);
         }
     }
 
-    public void SetBomb()
+    public void MiddleClickRelease()
+    {
+        spriteRenderer.color = new Color(168f / 255f, 168f / 255f, 168f / 255f);
+    }
+
+        public void SetBomb()
     {
         _isBomb = true;
     }

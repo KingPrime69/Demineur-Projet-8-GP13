@@ -33,9 +33,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "MiddleMouseClick",
+                    "name": "MiddleMouseClickPress",
                     "type": "Button",
                     "id": "1aef8acb-8d2e-4a1e-99af-6f2f91f5f0ad",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "MiddleMouseClickRelease",
+                    "type": "Button",
+                    "id": "ccd944bc-8f3c-405f-a3d7-7ac9e50be1cc",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -80,10 +89,21 @@
                     "name": "",
                     "id": "948761f6-6898-48ae-8b1f-69a0abcda5ea",
                     "path": "<Mouse>/middleButton",
-                    "interactions": "",
+                    "interactions": "Press",
                     "processors": "",
                     "groups": "",
-                    "action": "MiddleMouseClick",
+                    "action": "MiddleMouseClickPress",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "499b83a2-fd66-428d-89f4-1f68bdf1c88d",
+                    "path": "<Mouse>/middleButton",
+                    "interactions": "Press(behavior=1)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MiddleMouseClickRelease",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
