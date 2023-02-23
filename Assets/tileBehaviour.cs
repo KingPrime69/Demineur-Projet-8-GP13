@@ -12,19 +12,23 @@ public class tileBehaviour : MonoBehaviour
     bool clickHover = false;
     public bool[,] array { get; set; }
 
-    [SerializeField] Sprite neutral, flag ,bomb, clicked;
+    [SerializeField] Sprite neutral, flag, bomb, clicked;
+
     SpriteRenderer spriteRenderer;
 
-    Vector2 pos;
+    Vector2Int pos;
+
+    List<GameObject> Neighbours;
+
     TextMeshPro txt;
     // Start is called before the first frame update
     void Start()
     {
-        txt= GetComponentInChildren<TextMeshPro>();
+        txt = GetComponentInChildren<TextMeshPro>();
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    public void LeftClicked () 
+    public void LeftClicked()
     {
         if (spriteRenderer.sprite == flag) return;
         if (_isBomb)
@@ -32,7 +36,7 @@ public class tileBehaviour : MonoBehaviour
             //gameOver
             spriteRenderer.sprite = bomb;
         }
-        else 
+        else
         {
             spriteRenderer.sprite = clicked;
             if (numberBombs > 0)
@@ -51,10 +55,11 @@ public class tileBehaviour : MonoBehaviour
     public void MiddleClick()
     {
         clickHover = false ? clickHover : !clickHover;
-
-        if (clickHover) spriteRenderer.color = Color.white;
-        else spriteRenderer.color = new Color(168f / 255f, 168f / 255f, 168f / 255f);
-
+        foreach (GameObject go in Neighbours)
+        {
+            if (clickHover) go.GetComponent<SpriteRenderer>().color = Color.white;
+            else go.GetComponent<SpriteRenderer>().color = new Color(168f / 255f, 168f / 255f, 168f / 255f);
+        }
     }
 
     public void SetBomb()
@@ -64,14 +69,29 @@ public class tileBehaviour : MonoBehaviour
 
     public void SetNbBombs(int x, int y, Vector2 size)
     {
-        pos.x= x; pos.y = y;
+        pos.x = x; pos.y = y;
         for (int i = x - 1; i <= x + 1; i++)
         {
             for (int j = y - 1; j <= y + 1; j++)
             {
-                if ((i != x || j != y) && (i >=0 && j >= 0) && (i < size.x && j < size.y))
+                if ((i != x || j != y) && (i >= 0 && j >= 0) && (i < size.x && j < size.y))
                 {
-                   if (array[i, j]) numberBombs++;
+                    if (array[i, j]) numberBombs++;
+                }
+            }
+        }
+    }
+
+    public void SetNeighbours(Vector2 size, GameObject[,] tileArray)
+    {
+        for (int i = pos.x - 1; i <= pos.x + 1; i++)
+        {
+            for (int j = pos.y - 1; j <= pos.y + 1; j++)
+            {
+                if ((i != pos.x || j != pos.y) && (i >= 0 && j >= 0) && (i < (int)size.x && j < (int)size.y))
+                {
+                    UnityEngine.Debug.Log(tileArray[i, j]);
+                    Neighbours.Add(tileArray[i, j]);
                 }
             }
         }

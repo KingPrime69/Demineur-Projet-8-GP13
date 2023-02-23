@@ -31,7 +31,13 @@ public class SpawnerTile : MonoBehaviour
                 tileArray[i, y] = go;
             }
         }
-
+        for (int i = 0; i < _Size.x; i++)
+        {
+            for (int y = 0; y < _Size.y; y++)
+            {
+                tileArray[i, y].GetComponent<tileBehaviour>().SetNeighbours(_Size, tileArray);
+            }
+        }
     }
 
     void InitArray(bool[,] array)
