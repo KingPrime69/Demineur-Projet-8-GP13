@@ -6,7 +6,7 @@ using UnityEngine;
 public class SpawnerTile : MonoBehaviour
 {
     [SerializeField] GameObject _original;
-    [SerializeField] Vector2 _Size;
+    [SerializeField]  Vector2 _Size;
 
     [SerializeField] int _nbBombs;
     // Start is called before the first frame update
@@ -31,6 +31,7 @@ public class SpawnerTile : MonoBehaviour
                 tileArray[i, y] = go;
             }
         }
+
         for (int i = 0; i < _Size.x; i++)
         {
             for (int y = 0; y < _Size.y; y++)

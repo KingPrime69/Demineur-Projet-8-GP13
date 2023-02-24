@@ -19,8 +19,8 @@ public class ClickHandler : MonoBehaviour
         _mouse = FindObjectOfType<ClickDetector>();
         _mouse.LeftMouseClicked += LeftMouseOnClicked;
         _mouse.RightMouseClicked += RightMouseOnClicked;
-        _mouse.MiddleMouseClickedPress += MiddleMouseOnClickedPress;
-        _mouse.MiddleMouseClickedRelease += MiddleMouseOnClickedRelease;
+        _mouse.MiddleMouseClickedPressed += MiddleMouseOnClickedPress;
+        _mouse.MiddleMouseClickedReleased += MiddleMouseOnClickedRelease;
     }
 
     void LeftMouseOnClicked()

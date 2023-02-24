@@ -4,12 +4,12 @@ using System.Diagnostics;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UIElements;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class tileBehaviour : MonoBehaviour
 {
     bool _isBomb;
     int numberBombs;
-    bool clickOver = false;
     public bool[,] array { get; set; }
 
     [SerializeField] Sprite neutral, flag, bomb, clicked;
@@ -18,7 +18,7 @@ public class tileBehaviour : MonoBehaviour
 
     Vector2Int pos;
 
-    List<GameObject> Neighbours;
+    List<GameObject> Neighbour = new List<GameObject>();
 
     TextMeshPro txt;
     // Start is called before the first frame update
@@ -26,6 +26,37 @@ public class tileBehaviour : MonoBehaviour
     {
         txt = GetComponentInChildren<TextMeshPro>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+    public void SetNbBombs(int x, int y, Vector2 size)
+    {
+        pos.x = x; pos.y = y;
+        for (int i = x - 1; i <= x + 1; i++)
+        {
+            for (int j = y - 1; j <= y + 1; j++)
+            {
+                if ((i != x || j != y) && (i >= 0 && j >= 0) && (i < size.x && j < size.y))
+                {
+                    if (array[i, j]) numberBombs++;
+                }
+            }
+        }
+    }
+
+    public void SetNeighbours(Vector2 size, GameObject[,] tileArray)
+    {
+        for (int i = pos.x - 1; i <= pos.x + 1; i++)
+        {
+            for (int j = pos.y - 1; j <= pos.y + 1; j++)
+            {
+                if ((i != pos.x || j != pos.y) && (i >= 0 && j >= 0) && (i < (int)size.x && j < (int)size.y))
+                {
+                    Neighbour.Add(tileArray[i, j]);
+                    UnityEngine.Debug.Log(tileArray[i, j]);
+                }
+            }
+        }
+        //UnityEngine.Debug.Log(Neighbours);
+        //Neighbours.Clear();
     }
 
     public void LeftClicked()
@@ -54,51 +85,24 @@ public class tileBehaviour : MonoBehaviour
 
     public void MiddleClickPress()
     {
-        // clickHover = false ? clickHover : !clickHover;
-        foreach (GameObject go in Neighbours)
+        if (spriteRenderer.sprite == neutral) spriteRenderer.color = Color.white;
+        foreach (GameObject go in Neighbour)
         {
-           go.GetComponent<SpriteRenderer>().color = Color.white;
-            // else go.GetComponent<SpriteRenderer>().color = new Color(168f / 255f, 168f / 255f, 168f / 255f);
+            if (go.GetComponent<SpriteRenderer>().sprite == neutral) go.GetComponent<SpriteRenderer>().color = Color.white;
         }
     }
 
     public void MiddleClickRelease()
     {
-        spriteRenderer.color = new Color(168f / 255f, 168f / 255f, 168f / 255f);
+        if (spriteRenderer.sprite == neutral) spriteRenderer.color = new Color(168f / 255f, 168f / 255f, 168f / 255f);
+        foreach (GameObject go in Neighbour)
+        {
+            if(go.GetComponent<SpriteRenderer>().sprite == neutral) go.GetComponent<SpriteRenderer>().color = new Color(168f / 255f, 168f / 255f, 168f / 255f);
+        }
     }
 
         public void SetBomb()
     {
         _isBomb = true;
-    }
-
-    public void SetNbBombs(int x, int y, Vector2 size)
-    {
-        pos.x = x; pos.y = y;
-        for (int i = x - 1; i <= x + 1; i++)
-        {
-            for (int j = y - 1; j <= y + 1; j++)
-            {
-                if ((i != x || j != y) && (i >= 0 && j >= 0) && (i < size.x && j < size.y))
-                {
-                    if (array[i, j]) numberBombs++;
-                }
-            }
-        }
-    }
-
-    public void SetNeighbours(Vector2 size, GameObject[,] tileArray)
-    {
-        for (int i = pos.x - 1; i <= pos.x + 1; i++)
-        {
-            for (int j = pos.y - 1; j <= pos.y + 1; j++)
-            {
-                if ((i != pos.x || j != pos.y) && (i >= 0 && j >= 0) && (i < (int)size.x && j < (int)size.y))
-                {
-                    UnityEngine.Debug.Log(tileArray[i, j]);
-                    Neighbours.Add(tileArray[i, j]);
-                }
-            }
-        }
     }
 }

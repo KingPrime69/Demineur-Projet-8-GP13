@@ -12,8 +12,8 @@ public class ClickDetector : MonoBehaviour
     public Vector2 WorldPosition { get; private set; }
     public event Action LeftMouseClicked;
     public event Action RightMouseClicked;
-    public event Action MiddleMouseClickedPress;
-    public event Action MiddleMouseClickedRelease;
+    public event Action MiddleMouseClickedPressed;
+    public event Action MiddleMouseClickedReleased;
 
     void OnHover(InputValue value)
     {
@@ -31,10 +31,10 @@ public class ClickDetector : MonoBehaviour
     }
     private void OnMiddleMouseClickPress(InputValue _)
     {
-        MiddleMouseClickedPress?.Invoke();
+        MiddleMouseClickedPressed?.Invoke();
     }
     private void OnMiddleMouseClickRelease(InputValue _)
     {
-        MiddleMouseClickedPress?.Invoke();
+        MiddleMouseClickedReleased?.Invoke();
     }
 }
