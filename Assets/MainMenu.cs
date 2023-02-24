@@ -8,9 +8,9 @@ public class MainMenu : MonoBehaviour
     public void PlayGame()
     {
         Debug.Log("Switch to game");
-        SceneManager.LoadScene("Game");
+        SceneManager.LoadScene(1);
         Debug.Log("Game Scene loaded");
-        SceneManager.UnloadSceneAsync("MainMenu");
+        SceneManager.UnloadSceneAsync(0);
         Debug.Log("MainMenu unloaded");
     }
 

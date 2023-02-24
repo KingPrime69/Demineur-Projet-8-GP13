@@ -11,4 +11,17 @@ public class SettingsMenu : MonoBehaviour
         Debug.Log(volume);
         audioMixer.SetFloat("volume", volume);
     }
+
+    public void SetFullscreen(bool isFullScreen)
+    {
+        Screen.fullScreen = isFullScreen;
+        if (isFullScreen)
+        {
+            Debug.Log("Enabling fullscreen");
+        }
+        else
+        {
+            Debug.Log("Deactivating fullscreen");
+        }
+    }
 }
