@@ -98,12 +98,6 @@ public class tileBehaviour : MonoBehaviour
 
     public void MiddleClickPress()
     {
-        if (spriteRenderer.sprite == neutral) spriteRenderer.color = Color.white;
-        foreach (GameObject go in Neighbour)
-        {
-            if (go.GetComponent<SpriteRenderer>().sprite == neutral) go.GetComponent<SpriteRenderer>().color = Color.white;
-        }
-
         int flagInNeighbour = 0;
         foreach (GameObject go in Neighbour)
         {
@@ -124,17 +118,12 @@ public class tileBehaviour : MonoBehaviour
                 tilebehaviour.LeftClicked();
             }
         }
-
-        
-
-        if (numberBombs > 0)
+        if (spriteRenderer.sprite == neutral) spriteRenderer.color = Color.white;
+        foreach (GameObject go in Neighbour)
         {
-            txt.text = numberBombs.ToString();
+            if (go.GetComponent<SpriteRenderer>().sprite == neutral) go.GetComponent<SpriteRenderer>().color = Color.white;
         }
-        else
-        {
-            FloodFill(gameObject);
-        }
+
     }
 
     public void MiddleClickRelease()
