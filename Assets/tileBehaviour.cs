@@ -20,6 +20,8 @@ public class tileBehaviour : MonoBehaviour
 
     List<GameObject> Neighbour = new List<GameObject>();
 
+    SpriteRenderer _tempSpriteRenderer;
+
     TextMeshPro txt;
     // Start is called before the first frame update
     void Start()
@@ -51,12 +53,19 @@ public class tileBehaviour : MonoBehaviour
                 if ((i != pos.x || j != pos.y) && (i >= 0 && j >= 0) && (i < (int)size.x && j < (int)size.y))
                 {
                     Neighbour.Add(tileArray[i, j]);
-                    UnityEngine.Debug.Log(tileArray[i, j]);
                 }
             }
         }
-        //UnityEngine.Debug.Log(Neighbours);
-        //Neighbours.Clear();
+    }
+
+    public void HoverStart()
+    {
+        spriteRenderer.color = Color.white;
+    }
+
+    public void HoverEnd()
+    {
+        spriteRenderer.color = new Color(168f / 255f, 168f / 255f, 168f / 255f);
     }
 
     public void LeftClicked()

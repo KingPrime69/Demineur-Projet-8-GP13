@@ -10,7 +10,12 @@ public class ClickHandler : MonoBehaviour
     [SerializeField] UnityEvent _rightclicked;
     [SerializeField] UnityEvent _middleclickedpress;
     [SerializeField] UnityEvent _middleclickedrelease;
+    [SerializeField] UnityEvent _hoverstart;
+    [SerializeField] UnityEvent _hoverend;
+
     BoxCollider2D _collider;
+
+
     ClickDetector _mouse;
 
     private void Awake()
@@ -21,6 +26,7 @@ public class ClickHandler : MonoBehaviour
         _mouse.RightMouseClicked += RightMouseOnClicked;
         _mouse.MiddleMouseClickedPressed += MiddleMouseOnClickedPress;
         _mouse.MiddleMouseClickedReleased += MiddleMouseOnClickedRelease;
+        _mouse.Hover += MouseHover;
     }
 
     void LeftMouseOnClicked()
@@ -49,6 +55,18 @@ public class ClickHandler : MonoBehaviour
         if (_collider.bounds.Contains(_mouse.WorldPosition))
         {
             _middleclickedrelease?.Invoke();
+        }
+    }
+
+    void MouseHover()
+    {
+        if (_collider.bounds.Contains(_mouse.WorldPosition))
+        {
+            _hoverstart.Invoke();
+        }
+        else if(!_collider.bounds.Contains(_mouse.WorldPosition))
+        {            
+            _hoverend.Invoke();
         }
     }
 }

@@ -14,10 +14,11 @@ public class ClickDetector : MonoBehaviour
     public event Action RightMouseClicked;
     public event Action MiddleMouseClickedPressed;
     public event Action MiddleMouseClickedReleased;
-
+    public event Action Hover;
     void OnHover(InputValue value)
     {
         WorldPosition = Camera.main.ScreenToWorldPoint(value.Get<Vector2>());
+        Hover.Invoke();
     }
 
     private void OnLeftMouseClick(InputValue _)
