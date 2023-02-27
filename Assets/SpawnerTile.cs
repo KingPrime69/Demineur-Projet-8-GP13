@@ -6,10 +6,16 @@ using UnityEngine;
 public class SpawnerTile : MonoBehaviour
 {
     [SerializeField] GameObject _original;
+    [SerializeField] GameObject _camera;
     [SerializeField]  Vector2 _Size;
 
     [SerializeField] int _nbBombs;
     // Start is called before the first frame update
+
+
+    //10 8 
+    //18 14
+    //24 20
     public bool[,] array;
     public GameObject[,] tileArray;
     void Start()
@@ -23,12 +29,17 @@ public class SpawnerTile : MonoBehaviour
             for (int y = 0; y < _Size.y; y++)
             {
 
-                GameObject go = Instantiate(_original, new Vector3(i, y), Quaternion.identity);
+                GameObject go = Instantiate(_original, new Vector2(i, y) - _Size/2, Quaternion.identity);
                 if (array[i, y]) go.GetComponent<tileBehaviour>().SetBomb();
                 go.GetComponent<tileBehaviour>().array = array;
                 go.GetComponent<tileBehaviour>().SetNbBombs(i, y, _Size);
 
+                float calc = ((_Size.x * _Size.y/100)+1)*3;
+
+                _camera.GetComponent<Camera>().orthographicSize = calc;
+
                 tileArray[i, y] = go;
+
             }
         }
 

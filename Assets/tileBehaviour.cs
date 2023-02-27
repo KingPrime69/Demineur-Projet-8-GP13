@@ -104,7 +104,6 @@ public class tileBehaviour : MonoBehaviour
             tileBehaviour tilebehaviour = go.GetComponent<tileBehaviour>();
             if(go.GetComponent<SpriteRenderer>().sprite == tilebehaviour.flag)
             {
-                UnityEngine.Debug.Log("incre");
                 flagInNeighbour++;
             }
         }
@@ -114,7 +113,6 @@ public class tileBehaviour : MonoBehaviour
             tileBehaviour tilebehaviour = go.GetComponent<tileBehaviour>();
             if (flagInNeighbour == numberBombs && go.GetComponent<SpriteRenderer>().sprite == tilebehaviour.neutral)
             {
-                UnityEngine.Debug.Log(flagInNeighbour);
                 tilebehaviour.LeftClicked();
             }
         }
@@ -139,8 +137,6 @@ public class tileBehaviour : MonoBehaviour
     {
         _isBomb = true;
     }
-
-
 
     void FloodFill(GameObject n)
     {
