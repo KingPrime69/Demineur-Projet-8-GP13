@@ -312,8 +312,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _original: {fileID: 3502645040759214238, guid: 6ea8afd899152f148b81240df4e486c1, type: 3}
-  _Size: {x: 5, y: 5}
-  _nbBombs: 5
+  _Size: {x: 7, y: 7}
+  _nbBombs: 4
 --- !u!4 &2119212183
 Transform:
   m_ObjectHideFlags: 0

@@ -9,7 +9,7 @@ using static UnityEngine.RuleTile.TilingRuleOutput;
 public class tileBehaviour : MonoBehaviour
 {
     bool _isBomb;
-    int numberBombs;
+    public int numberBombs;
     public bool[,] array { get; set; }
 
     [SerializeField] Sprite neutral, flag, bomb, clicked;
@@ -83,6 +83,10 @@ public class tileBehaviour : MonoBehaviour
             {
                 txt.text = numberBombs.ToString();
             }
+            else
+            {
+                FloodFill(gameObject);
+            }
         }
     }
 
@@ -106,12 +110,36 @@ public class tileBehaviour : MonoBehaviour
         if (spriteRenderer.sprite == neutral) spriteRenderer.color = new Color(168f / 255f, 168f / 255f, 168f / 255f);
         foreach (GameObject go in Neighbour)
         {
-            if(go.GetComponent<SpriteRenderer>().sprite == neutral) go.GetComponent<SpriteRenderer>().color = new Color(168f / 255f, 168f / 255f, 168f / 255f);
+            if (go.GetComponent<SpriteRenderer>().sprite == neutral) go.GetComponent<SpriteRenderer>().color = new Color(168f / 255f, 168f / 255f, 168f / 255f);
         }
     }
 
-        public void SetBomb()
+    public void SetBomb()
     {
         _isBomb = true;
+    }
+
+
+
+    void FloodFill(GameObject n)
+    {
+        foreach (GameObject go in n.GetComponent<tileBehaviour>().Neighbour)
+        {
+            tileBehaviour tilebehaviour = go.GetComponent<tileBehaviour>();
+
+            
+            if (tilebehaviour.numberBombs == 0 && !tilebehaviour._isBomb && go.GetComponent<SpriteRenderer>().sprite == tilebehaviour.neutral)
+            {
+                go.GetComponent<SpriteRenderer>().sprite = clicked;
+                FloodFill(go);
+            }
+            else if (tilebehaviour.numberBombs > 0)
+            {
+                go.GetComponent<SpriteRenderer>().sprite = clicked;
+                tilebehaviour.txt.text = tilebehaviour.numberBombs.ToString();
+            }
+            //UnityEngine.Debug.Log("2");
+        }
+
     }
 }
