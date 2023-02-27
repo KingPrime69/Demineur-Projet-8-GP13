@@ -103,6 +103,38 @@ public class tileBehaviour : MonoBehaviour
         {
             if (go.GetComponent<SpriteRenderer>().sprite == neutral) go.GetComponent<SpriteRenderer>().color = Color.white;
         }
+
+        int flagInNeighbour = 0;
+        foreach (GameObject go in Neighbour)
+        {
+            tileBehaviour tilebehaviour = go.GetComponent<tileBehaviour>();
+            if(go.GetComponent<SpriteRenderer>().sprite == tilebehaviour.flag)
+            {
+                UnityEngine.Debug.Log("incre");
+                flagInNeighbour++;
+            }
+        }
+
+        foreach (GameObject go in Neighbour)
+        {
+            tileBehaviour tilebehaviour = go.GetComponent<tileBehaviour>();
+            if (flagInNeighbour == numberBombs && go.GetComponent<SpriteRenderer>().sprite == tilebehaviour.neutral)
+            {
+                UnityEngine.Debug.Log(flagInNeighbour);
+                tilebehaviour.LeftClicked();
+            }
+        }
+
+        
+
+        if (numberBombs > 0)
+        {
+            txt.text = numberBombs.ToString();
+        }
+        else
+        {
+            FloodFill(gameObject);
+        }
     }
 
     public void MiddleClickRelease()
