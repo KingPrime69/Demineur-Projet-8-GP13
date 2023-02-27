@@ -7,19 +7,17 @@ public class SpawnerTile : MonoBehaviour
 {
     [SerializeField] GameObject _original;
     [SerializeField] GameObject _camera;
-    [SerializeField]  Vector2 _Size;
-
-    [SerializeField] int _nbBombs;
+    Vector2 _Size;
+    int _nbBombs;
     // Start is called before the first frame update
 
 
-    //10 8 
-    //18 14
-    //24 20
     public bool[,] array;
     public GameObject[,] tileArray;
     void Start()
     {
+        _Size = Difficulty.Size;
+        _nbBombs = Difficulty.nbBombs;
         array = new bool[(int)_Size.x, (int)_Size.y];
         tileArray = new GameObject[(int)_Size.x, (int)_Size.y];
         InitArray(array);
