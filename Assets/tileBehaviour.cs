@@ -19,7 +19,7 @@ public class tileBehaviour : MonoBehaviour
 
     SpriteRenderer spriteRenderer;
 
-    [SerializeField] GameObject spawnerTile;
+    SpawnerTile spawnerTile;
 
     Vector2Int pos;
 
@@ -31,7 +31,7 @@ public class tileBehaviour : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        spawnerTile = GameObject.Find("TileSpawner");
+        spawnerTile = GameObject.Find("TileSpawner").GetComponent<SpawnerTile>();
         txt = GetComponentInChildren<TextMeshPro>();
         spriteRenderer = GetComponent<SpriteRenderer>();
 
@@ -77,10 +77,10 @@ public class tileBehaviour : MonoBehaviour
 
     public void LeftClicked()
     {
-        if (!spawnerTile.GetComponent<SpawnerTile>().firstClick)
+        if (!spawnerTile.firstClick)
         {
-            spawnerTile.GetComponent<SpawnerTile>().InitBomb(array, pos);
-            spawnerTile.GetComponent<SpawnerTile>().firstClick = true;
+            spawnerTile.InitBomb(array, pos);
+            spawnerTile.firstClick = true;
         }
         //UnityEngine.Debug.Log(array[pos.x,pos.y]);
         if (spriteRenderer.sprite == flag) return;
