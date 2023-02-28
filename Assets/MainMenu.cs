@@ -45,6 +45,7 @@ public static class Difficulty
 {
     public static Vector2Int Size = new Vector2Int(10, 8);
     public static int nbBombs = 10;
+    public static int nbReveal = 0;
 
 }
 

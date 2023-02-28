@@ -13,7 +13,6 @@ public class tileBehaviour : MonoBehaviour
     public int numberBombs;
     public bool[,] array { get; set; }
 
-
     [SerializeField] Sprite neutral, flag, bomb, clicked;
 
 
@@ -82,18 +81,25 @@ public class tileBehaviour : MonoBehaviour
             spawnerTile.InitBomb(array, pos);
             spawnerTile.firstClick = true;
         }
-        //UnityEngine.Debug.Log(array[pos.x,pos.y]);
-        if (spriteRenderer.sprite == flag) return;
+        if (spriteRenderer.sprite != neutral) return;
         if (_isBomb)
         {
             spriteRenderer.sprite = bomb;
 
             WinLose.winLoseTitle = "Defeat";
+            Difficulty.nbReveal = 0;
             SceneManager.LoadScene("EndGame");
-            
         }
         else
         {
+            Difficulty.nbReveal++;
+            if (Difficulty.nbReveal == (Difficulty.Size.x * Difficulty.Size.y) - Difficulty.nbBombs)
+            {
+                WinLose.winLoseTitle = "Victory !";
+                Difficulty.nbReveal = 0;
+                SceneManager.LoadScene("EndGame");
+            }
+
             spriteRenderer.sprite = clicked;
             if (numberBombs > 0)
             {
@@ -103,6 +109,7 @@ public class tileBehaviour : MonoBehaviour
             {
                 FloodFill(gameObject);
             }
+
         }
     }
 
@@ -168,15 +175,15 @@ public class tileBehaviour : MonoBehaviour
             if (tilebehaviour.numberBombs == 0 && !tilebehaviour._isBomb && go.GetComponent<SpriteRenderer>().sprite == tilebehaviour.neutral)
             {
                 go.GetComponent<SpriteRenderer>().sprite = clicked;
+                Difficulty.nbReveal++;
                 FloodFill(go);
             }
-            else if (tilebehaviour.numberBombs > 0)
+            else if (tilebehaviour.numberBombs > 0 && go.GetComponent<SpriteRenderer>().sprite == tilebehaviour.neutral)
             {
                 go.GetComponent<SpriteRenderer>().sprite = clicked;
+                Difficulty.nbReveal++;
                 tilebehaviour.txt.text = tilebehaviour.numberBombs.ToString();
             }
-            //UnityEngine.Debug.Log("2");
         }
-
     }
 }
