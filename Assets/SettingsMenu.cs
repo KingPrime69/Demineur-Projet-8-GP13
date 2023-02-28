@@ -20,7 +20,6 @@ public class SettingsMenu : MonoBehaviour
 
     private void ResolutionStart()
     {
-        Debug.Log("Start method is called");
         resolutions = Screen.resolutions;   // Get all resolutions availbe for the screen
 
         resolutionDropdown.ClearOptions();      // Clear all default set resolutions 
@@ -55,26 +54,16 @@ public class SettingsMenu : MonoBehaviour
     {
         Resolution newResolution = resolutionList2[selectedResolutionIndex];
         Screen.SetResolution(newResolution.width, newResolution.height, Screen.fullScreen);
-        Debug.Log("New resolution : " + newResolution.width + " x " + newResolution.height);
     }
 
     public AudioMixer audioMixer;
     public void SetVolume(float volume)
     {
-        Debug.Log(volume);
         audioMixer.SetFloat("volume", volume);
     }
 
     public void SetFullscreen(bool isFullScreen)
     {
         Screen.fullScreen = isFullScreen;
-        if (isFullScreen)
-        {
-            Debug.Log("Enabling fullscreen");
-        }
-        else
-        {
-            Debug.Log("Deactivating fullscreen");
-        }
     }
 }
