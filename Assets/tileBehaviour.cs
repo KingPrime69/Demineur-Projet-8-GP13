@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 using static UnityEngine.RuleTile.TilingRuleOutput;
 
@@ -73,8 +74,11 @@ public class tileBehaviour : MonoBehaviour
         if (spriteRenderer.sprite == flag) return;
         if (_isBomb)
         {
-            //gameOver
             spriteRenderer.sprite = bomb;
+
+            WinLose.winLoseTitle = "Defeat";
+            SceneManager.LoadScene("EndGame");
+            
         }
         else
         {
@@ -102,7 +106,7 @@ public class tileBehaviour : MonoBehaviour
         foreach (GameObject go in Neighbour)
         {
             tileBehaviour tilebehaviour = go.GetComponent<tileBehaviour>();
-            if(go.GetComponent<SpriteRenderer>().sprite == tilebehaviour.flag)
+            if (go.GetComponent<SpriteRenderer>().sprite == tilebehaviour.flag)
             {
                 flagInNeighbour++;
             }
@@ -144,7 +148,7 @@ public class tileBehaviour : MonoBehaviour
         {
             tileBehaviour tilebehaviour = go.GetComponent<tileBehaviour>();
 
-            
+
             if (tilebehaviour.numberBombs == 0 && !tilebehaviour._isBomb && go.GetComponent<SpriteRenderer>().sprite == tilebehaviour.neutral)
             {
                 go.GetComponent<SpriteRenderer>().sprite = clicked;
