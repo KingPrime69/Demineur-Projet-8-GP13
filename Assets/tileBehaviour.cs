@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 using static UnityEngine.RuleTile.TilingRuleOutput;
 
@@ -85,8 +86,11 @@ public class tileBehaviour : MonoBehaviour
         if (spriteRenderer.sprite == flag) return;
         if (_isBomb)
         {
-            //gameOver
             spriteRenderer.sprite = bomb;
+
+            WinLose.winLoseTitle = "Defeat";
+            SceneManager.LoadScene("EndGame");
+            
         }
         else
         {
