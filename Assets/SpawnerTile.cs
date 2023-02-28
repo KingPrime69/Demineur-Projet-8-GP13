@@ -11,6 +11,8 @@ public class SpawnerTile : MonoBehaviour
     int _nbBombs;
     // Start is called before the first frame update
 
+    public bool firstClick;
+
 
     public bool[,] array;
     public GameObject[,] tileArray;
@@ -20,19 +22,20 @@ public class SpawnerTile : MonoBehaviour
         _nbBombs = Difficulty.nbBombs;
         array = new bool[(int)_Size.x, (int)_Size.y];
         tileArray = new GameObject[(int)_Size.x, (int)_Size.y];
-        InitArray(array);
+
 
         for (int i = 0; i < _Size.x; i++)
         {
             for (int y = 0; y < _Size.y; y++)
             {
 
-                GameObject go = Instantiate(_original, new Vector2(i, y) - _Size/2, Quaternion.identity);
-                if (array[i, y]) go.GetComponent<tileBehaviour>().SetBomb();
+                GameObject go = Instantiate(_original, new Vector2(i, y) - _Size / 2, Quaternion.identity);
                 go.GetComponent<tileBehaviour>().array = array;
+
+                //if (array[i, y]) go.GetComponent<tileBehaviour>().SetBomb();
                 go.GetComponent<tileBehaviour>().SetNbBombs(i, y, _Size);
 
-                float calc = ((_Size.x * _Size.y/100)+1)*3;
+                float calc = ((_Size.x * _Size.y / 100) + 1) * 3;
 
                 _camera.GetComponent<Camera>().orthographicSize = calc;
 
@@ -50,7 +53,31 @@ public class SpawnerTile : MonoBehaviour
         }
     }
 
-    void InitArray(bool[,] array)
+    public void InitBomb(bool[,] array, Vector2Int posclick)
+    {
+        InitArray(array, posclick);
+
+        for (int i = 0; i < _Size.x; i++)
+        {
+            for (int y = 0; y < _Size.y; y++)
+            {
+
+                //GameObject go = Instantiate(_original, new Vector2(i, y) - _Size / 2, Quaternion.identity);
+                if (array[i, y]) tileArray[i, y].GetComponent<tileBehaviour>().SetBomb();
+                tileArray[i,y].GetComponent<tileBehaviour>().array = array;
+                tileArray[i, y].GetComponent<tileBehaviour>().SetNbBombs(i, y, _Size);
+
+                float calc = ((_Size.x * _Size.y / 100) + 1) * 3;
+
+                _camera.GetComponent<Camera>().orthographicSize = calc;
+
+                //tileArray[i, y] = go;
+
+            }
+        }
+    }
+
+    public void InitArray(bool[,] array, Vector2Int posclick)
     {
         if (_nbBombs < _Size.x * _Size.y)
         {
@@ -62,7 +89,7 @@ public class SpawnerTile : MonoBehaviour
                     x = Random.Range(0, (int)_Size.x);
                     y = Random.Range(0, (int)_Size.y);
                 }
-                while (array[x, y]);
+                while (array[x, y] || x == posclick.x && y == posclick.y);
                 array[x, y] = true;
             }
         }

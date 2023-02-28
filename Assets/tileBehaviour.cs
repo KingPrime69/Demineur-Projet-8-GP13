@@ -12,22 +12,28 @@ public class tileBehaviour : MonoBehaviour
     public int numberBombs;
     public bool[,] array { get; set; }
 
+
     [SerializeField] Sprite neutral, flag, bomb, clicked;
 
+
     SpriteRenderer spriteRenderer;
+
+    [SerializeField] GameObject spawnerTile;
 
     Vector2Int pos;
 
     List<GameObject> Neighbour = new List<GameObject>();
 
-    SpriteRenderer _tempSpriteRenderer;
+    //SpriteRenderer _tempSpriteRenderer;
 
     TextMeshPro txt;
     // Start is called before the first frame update
     void Start()
     {
+        spawnerTile = GameObject.Find("TileSpawner");
         txt = GetComponentInChildren<TextMeshPro>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+
     }
     public void SetNbBombs(int x, int y, Vector2 size)
     {
@@ -70,6 +76,12 @@ public class tileBehaviour : MonoBehaviour
 
     public void LeftClicked()
     {
+        if (!spawnerTile.GetComponent<SpawnerTile>().firstClick)
+        {
+            spawnerTile.GetComponent<SpawnerTile>().InitBomb(array, pos);
+            spawnerTile.GetComponent<SpawnerTile>().firstClick = true;
+        }
+        //UnityEngine.Debug.Log(array[pos.x,pos.y]);
         if (spriteRenderer.sprite == flag) return;
         if (_isBomb)
         {
@@ -98,24 +110,28 @@ public class tileBehaviour : MonoBehaviour
 
     public void MiddleClickPress()
     {
-        int flagInNeighbour = 0;
-        foreach (GameObject go in Neighbour)
+        if (spriteRenderer.sprite == clicked)
         {
-            tileBehaviour tilebehaviour = go.GetComponent<tileBehaviour>();
-            if(go.GetComponent<SpriteRenderer>().sprite == tilebehaviour.flag)
+            int flagInNeighbour = 0;
+            foreach (GameObject go in Neighbour)
             {
-                flagInNeighbour++;
+                tileBehaviour tilebehaviour = go.GetComponent<tileBehaviour>();
+                if (go.GetComponent<SpriteRenderer>().sprite == tilebehaviour.flag)
+                {
+                    flagInNeighbour++;
+                }
+            }
+
+            foreach (GameObject go in Neighbour)
+            {
+                tileBehaviour tilebehaviour = go.GetComponent<tileBehaviour>();
+                if (flagInNeighbour == numberBombs && go.GetComponent<SpriteRenderer>().sprite == tilebehaviour.neutral)
+                {
+                    tilebehaviour.LeftClicked();
+                }
             }
         }
 
-        foreach (GameObject go in Neighbour)
-        {
-            tileBehaviour tilebehaviour = go.GetComponent<tileBehaviour>();
-            if (flagInNeighbour == numberBombs && go.GetComponent<SpriteRenderer>().sprite == tilebehaviour.neutral)
-            {
-                tilebehaviour.LeftClicked();
-            }
-        }
         if (spriteRenderer.sprite == neutral) spriteRenderer.color = Color.white;
         foreach (GameObject go in Neighbour)
         {
@@ -144,7 +160,7 @@ public class tileBehaviour : MonoBehaviour
         {
             tileBehaviour tilebehaviour = go.GetComponent<tileBehaviour>();
 
-            
+
             if (tilebehaviour.numberBombs == 0 && !tilebehaviour._isBomb && go.GetComponent<SpriteRenderer>().sprite == tilebehaviour.neutral)
             {
                 go.GetComponent<SpriteRenderer>().sprite = clicked;
