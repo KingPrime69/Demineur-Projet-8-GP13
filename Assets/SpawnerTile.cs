@@ -89,8 +89,6 @@ public class SpawnerTile : MonoBehaviour
                 {
                     x = Random.Range(0, (int)_Size.x);
                     y = Random.Range(0, (int)_Size.y);
-                    if (x >= posclick.x - 1 && x <= posclick.x + 1 && y >= posclick.y - 1 && y <= posclick.y + 1)
-                        UnityEngine.Debug.Log($"{x} {y}");
                 }
                 while (array[x, y] || x == posclick.x && y == posclick.y || x >= posclick.x - 1 && x <= posclick.x + 1 && y >= posclick.y - 1 && y <= posclick.y + 1);
                 array[x, y] = true;
