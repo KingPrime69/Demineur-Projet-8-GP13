@@ -66,12 +66,14 @@ public class tileBehaviour : MonoBehaviour
 
     public void HoverStart()
     {
-        spriteRenderer.color = Color.white;
+        if (spriteRenderer != null)
+            spriteRenderer.color = Color.white;
     }
 
     public void HoverEnd()
     {
-        spriteRenderer.color = new Color(168f / 255f, 168f / 255f, 168f / 255f);
+        if (spriteRenderer != null)
+            spriteRenderer.color = new Color(168f / 255f, 168f / 255f, 168f / 255f);
     }
 
     public void LeftClicked()
