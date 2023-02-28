@@ -9,6 +9,8 @@ public class SettingsMenu : MonoBehaviour
 {
 
     Resolution[] resolutions;
+    List<string> resolutionList = new List<string>();
+    List<Resolution> resolutionList2 = new List<Resolution>();
     public TMPro.TMP_Dropdown resolutionDropdown;
     void Start()
     {
@@ -23,15 +25,19 @@ public class SettingsMenu : MonoBehaviour
 
         resolutionDropdown.ClearOptions();      // Clear all default set resolutions 
 
-        List<string> resolutionList = new List<string>();
-
         int currentResolution = 0;
         for (int i = 0; i < resolutions.Length; i++)     // For that put all resolution in resoltions into a list
         {
             string resolutionOption = resolutions[i].width + " x " + resolutions[i].height + " - " + resolutions[i].refreshRate + "hz";
-            //if (resolutions[i].refreshRate == 60)        // Supposed to keep only the resolutions that have a refreshRate of 60hz
+            if (i == 0)
             {
                 resolutionList.Add(resolutionOption);
+                resolutionList2.Add(resolutions[i]);
+            }
+            else if (resolutions[i].width != resolutions[i - 1].width && resolutions[i].height != resolutions[i - 1].height)        // Supposed to keep only the resolutions that have a refreshRate of 60hz
+            {
+                resolutionList.Add(resolutionOption);
+                resolutionList2.Add(resolutions[i]);
             }
             //if (resolutions[i].width == Screen.width &&       
             //  resolutions[i].height == Screen.height)
@@ -47,7 +53,7 @@ public class SettingsMenu : MonoBehaviour
 
     public void SetResolution(int selectedResolutionIndex)
     {
-        Resolution newResolution = resolutions[selectedResolutionIndex];
+        Resolution newResolution = resolutionList2[selectedResolutionIndex];
         Screen.SetResolution(newResolution.width, newResolution.height, Screen.fullScreen);
         Debug.Log("New resolution : " + newResolution.width + " x " + newResolution.height);
     }
