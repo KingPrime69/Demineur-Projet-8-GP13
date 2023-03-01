@@ -77,6 +77,7 @@ public class tileBehaviour : MonoBehaviour
             spriteRenderer.color = new Color(168f / 255f, 168f / 255f, 168f / 255f);
     }
 
+
     public void LeftClicked()
     {
         if (!spawnerTile.firstClick)
@@ -87,15 +88,15 @@ public class tileBehaviour : MonoBehaviour
         if (spriteRenderer.sprite != neutral) return;
         if (_isBomb)
         {
+            int i = 0;
             foreach(GameObject go in spawnerTile.tileArray)
             {
                 if (go.GetComponent<tileBehaviour>()._isBomb)
                 {
-                    go.GetComponent<SpriteRenderer>().sprite = go.GetComponent<tileBehaviour>().bomb;
-                    go.transform.GetChild(1).gameObject.SetActive(true);
+                    i++;
+                    StartCoroutine(BombReveal(go, i));
                 }
             }
-
             spriteRenderer.sprite = bomb;
 
             //WinLose.winLoseTitle = "Defeat";
@@ -123,6 +124,14 @@ public class tileBehaviour : MonoBehaviour
             }
 
         }
+    }
+
+    private IEnumerator BombReveal(GameObject go, int i)
+    {
+        yield return new WaitForSeconds((5f / spawnerTile.nbBombs) * i);
+
+        go.GetComponent<SpriteRenderer>().sprite = go.GetComponent<tileBehaviour>().bomb;
+        go.transform.GetChild(1).gameObject.SetActive(true);
     }
 
     public void RightClick()

@@ -8,7 +8,7 @@ public class SpawnerTile : MonoBehaviour
     [SerializeField] GameObject _original;
     [SerializeField] GameObject _camera;
     Vector2 _Size;
-    int _nbBombs;
+    public int nbBombs;
     // Start is called before the first frame update
 
     public bool firstClick;
@@ -19,7 +19,7 @@ public class SpawnerTile : MonoBehaviour
     void Start()
     {
         _Size = Difficulty.Size;
-        _nbBombs = Difficulty.nbBombs;
+        nbBombs = Difficulty.nbBombs;
         array = new bool[(int)_Size.x, (int)_Size.y];
         tileArray = new GameObject[(int)_Size.x, (int)_Size.y];
 
@@ -80,9 +80,9 @@ public class SpawnerTile : MonoBehaviour
     public void InitArray(bool[,] array, Vector2Int posclick)
     {
         UnityEngine.Debug.Log(posclick);
-        if (_nbBombs < _Size.x * _Size.y)
+        if (nbBombs < _Size.x * _Size.y)
         {
-            for (int i = 0; i < _nbBombs; i++)
+            for (int i = 0; i < nbBombs; i++)
             {
                 int x, y;
                 do
