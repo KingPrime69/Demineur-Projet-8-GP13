@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
@@ -86,11 +87,20 @@ public class tileBehaviour : MonoBehaviour
         if (spriteRenderer.sprite != neutral) return;
         if (_isBomb)
         {
+            foreach(GameObject go in spawnerTile.tileArray)
+            {
+                if (go.GetComponent<tileBehaviour>()._isBomb)
+                {
+                    go.GetComponent<SpriteRenderer>().sprite = go.GetComponent<tileBehaviour>().bomb;
+                    go.transform.GetChild(1).gameObject.SetActive(true);
+                }
+            }
+
             spriteRenderer.sprite = bomb;
 
-            WinLose.winLoseTitle = "Defeat";
-            Difficulty.nbReveal = 0;
-            SceneManager.LoadScene("EndGame");
+            //WinLose.winLoseTitle = "Defeat";
+            //Difficulty.nbReveal = 0;
+            //SceneManager.LoadScene("EndGame");
         }
         else
         {
