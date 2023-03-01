@@ -109,7 +109,7 @@ public class tileBehaviour : MonoBehaviour
             if (Difficulty.nbReveal == (Difficulty.Size.x * Difficulty.Size.y) - Difficulty.nbBombs)
             {
                 WinLose.winLoseTitle = "Victory !";
-                Difficulty.nbReveal = 0;
+                
                 SceneManager.LoadScene("EndGame");
             }
 

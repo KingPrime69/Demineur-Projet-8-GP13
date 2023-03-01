@@ -6,15 +6,17 @@ using TMPro;
 
 public class TimerScript : MonoBehaviour
 {
-    public float timeValue = 0;
+    private void Start()
+    {
+        WinLose.timeValue = 0;
+    }
     public TMPro.TMP_Text timeText;
     // Update is called once per frame
     void Update()
     {
-            timeValue += Time.deltaTime;
-      
+        WinLose.timeValue += Time.deltaTime;
 
-        DisplayTimeElapsed(timeValue);
+        DisplayTimeElapsed(WinLose.timeValue);
     }
 
     void DisplayTimeElapsed(float timeToDisplay)
