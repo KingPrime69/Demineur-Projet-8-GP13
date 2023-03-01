@@ -64,7 +64,7 @@ public class SpawnerTile : MonoBehaviour
 
                 //GameObject go = Instantiate(_original, new Vector2(i, y) - _Size / 2, Quaternion.identity);
                 if (array[i, y]) tileArray[i, y].GetComponent<tileBehaviour>().SetBomb();
-                tileArray[i,y].GetComponent<tileBehaviour>().array = array;
+                tileArray[i, y].GetComponent<tileBehaviour>().array = array;
                 tileArray[i, y].GetComponent<tileBehaviour>().SetNbBombs(i, y, _Size);
 
                 float calc = ((_Size.x * _Size.y / 100) + 1) * 3;
@@ -79,6 +79,7 @@ public class SpawnerTile : MonoBehaviour
 
     public void InitArray(bool[,] array, Vector2Int posclick)
     {
+        UnityEngine.Debug.Log(posclick);
         if (_nbBombs < _Size.x * _Size.y)
         {
             for (int i = 0; i < _nbBombs; i++)
@@ -89,7 +90,7 @@ public class SpawnerTile : MonoBehaviour
                     x = Random.Range(0, (int)_Size.x);
                     y = Random.Range(0, (int)_Size.y);
                 }
-                while (array[x, y] || x == posclick.x && y == posclick.y);
+                while (array[x, y] || x == posclick.x && y == posclick.y || x >= posclick.x - 1 && x <= posclick.x + 1 && y >= posclick.y - 1 && y <= posclick.y + 1);
                 array[x, y] = true;
             }
         }

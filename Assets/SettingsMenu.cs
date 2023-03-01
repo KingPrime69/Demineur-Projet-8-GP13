@@ -27,7 +27,7 @@ public class SettingsMenu : MonoBehaviour
         int currentResolution = 0;
         for (int i = 0; i < resolutions.Length; i++)     // For that put all resolution in resoltions into a list
         {
-            string resolutionOption = resolutions[i].width + " x " + resolutions[i].height + " - " + resolutions[i].refreshRate + "hz";
+            string resolutionOption = resolutions[i].width + " x " + resolutions[i].height;
             if (i == 0)
             {
                 resolutionList.Add(resolutionOption);
