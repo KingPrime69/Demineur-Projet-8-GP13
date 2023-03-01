@@ -417,7 +417,7 @@ GameObject:
   - component: {fileID: 6025401065823856805}
   - component: {fileID: 416041847293730658}
   - component: {fileID: 7688979973431777344}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: particles
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -25,6 +25,8 @@ public class tileBehaviour : MonoBehaviour
 
     List<GameObject> Neighbour = new List<GameObject>();
 
+    List<GameObject> _Bombs = new List<GameObject>();
+
     //SpriteRenderer _tempSpriteRenderer;
 
     TextMeshPro txt;
@@ -88,20 +90,35 @@ public class tileBehaviour : MonoBehaviour
         if (spriteRenderer.sprite != neutral) return;
         if (_isBomb)
         {
-            int i = 0;
-            foreach(GameObject go in spawnerTile.tileArray)
+            spriteRenderer.sprite = bomb;
+            gameObject.transform.GetChild(1).gameObject.SetActive(true);
+            foreach (GameObject go in spawnerTile.tileArray)
             {
                 if (go.GetComponent<tileBehaviour>()._isBomb)
                 {
-                    i++;
-                    StartCoroutine(BombReveal(go, i));
+
+                    _Bombs.Add(go);
+                    //FloodFillBomb(gameObject);
+                    Shuffle<GameObject>();
                 }
             }
-            spriteRenderer.sprite = bomb;
 
-            //WinLose.winLoseTitle = "Defeat";
-            //Difficulty.nbReveal = 0;
-            //SceneManager.LoadScene("EndGame");
+            int i = 0;
+            foreach(GameObject go in _Bombs)
+            {
+                i++;
+                if (go.GetComponent<tileBehaviour>().pos == pos) continue;
+                StartCoroutine(BombReveal(go, i));
+            }
+            foreach (GameObject go in _Bombs)
+            {
+                if (!go.transform.GetChild(1).gameObject.IsDestroyed())
+                {
+                    go.transform.GetChild(1).gameObject.SetActive(false);
+                }
+            }
+            StartCoroutine(LoadEndScene(6f));
+
         }
         else
         {
@@ -124,6 +141,14 @@ public class tileBehaviour : MonoBehaviour
             }
 
         }
+    }
+
+    private IEnumerator LoadEndScene(float time)
+    {
+        yield return new WaitForSeconds(time);
+        WinLose.winLoseTitle = "Defeat";
+        Difficulty.nbReveal = 0;
+        SceneManager.LoadScene("EndGame");
     }
 
     private IEnumerator BombReveal(GameObject go, int i)
@@ -205,6 +230,19 @@ public class tileBehaviour : MonoBehaviour
                 Difficulty.nbReveal++;
                 tilebehaviour.txt.text = tilebehaviour.numberBombs.ToString();
             }
+        }
+    }
+
+    void Shuffle<T>()
+    {
+        int n = _Bombs.Count;
+        while(n>1)
+        {
+            n--;
+            int k = Random.Range(0, n+1);
+            GameObject value = _Bombs[k];
+            _Bombs[k] = _Bombs[n];
+            _Bombs[n] = value;
         }
     }
 }
