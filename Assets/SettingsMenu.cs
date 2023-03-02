@@ -12,6 +12,8 @@ public class SettingsMenu : MonoBehaviour
     List<string> resolutionList = new List<string>();
     List<Resolution> resolutionList2 = new List<Resolution>();
     public TMPro.TMP_Dropdown resolutionDropdown;
+
+    [SerializeField] Slider volumeSlider;
     void Start()
     {
         SetFullscreen(true);
@@ -57,7 +59,9 @@ public class SettingsMenu : MonoBehaviour
     public AudioMixer audioMixer;
     public void SetVolume(float volume)
     {
+        volume = volumeSlider.value;
         audioMixer.SetFloat("volume", volume);
+        Debug.Log(volume);
     }
 
     public void SetFullscreen(bool isFullScreen)

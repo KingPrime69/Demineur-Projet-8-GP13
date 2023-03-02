@@ -79,7 +79,6 @@ public class SpawnerTile : MonoBehaviour
 
     public void InitArray(bool[,] array, Vector2Int posclick)
     {
-        UnityEngine.Debug.Log(posclick);
         if (nbBombs < _Size.x * _Size.y)
         {
             for (int i = 0; i < nbBombs; i++)

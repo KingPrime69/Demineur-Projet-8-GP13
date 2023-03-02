@@ -16,6 +16,8 @@ public class tileBehaviour : MonoBehaviour
 
     [SerializeField] Sprite neutral, flag, bomb, clicked;
 
+    AudioSource _audioSrc;
+    [SerializeField] AudioClip lclick, rclick;
 
     SpriteRenderer spriteRenderer;
 
@@ -36,6 +38,7 @@ public class tileBehaviour : MonoBehaviour
         spawnerTile = GameObject.Find("TileSpawner").GetComponent<SpawnerTile>();
         txt = GetComponentInChildren<TextMeshPro>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+       _audioSrc = GetComponentInChildren<AudioSource>();
     }
     public void SetNbBombs(int x, int y, Vector2 size)
     {
@@ -87,6 +90,9 @@ public class tileBehaviour : MonoBehaviour
             spawnerTile.firstClick = true;
             WinLose.isPlaying = true;   // Starts considering player actions
         }
+
+        _audioSrc.PlayOneShot(lclick);
+
         if (spriteRenderer.sprite != neutral) return;
         if (_isBomb)
         {
@@ -165,6 +171,7 @@ public class tileBehaviour : MonoBehaviour
     {
         if (spriteRenderer.sprite == flag) spriteRenderer.sprite = neutral;
         else if (spriteRenderer.sprite == neutral) spriteRenderer.sprite = flag;
+        _audioSrc.PlayOneShot(rclick);
     }
 
     public void MiddleClickPress()
