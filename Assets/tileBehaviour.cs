@@ -17,7 +17,7 @@ public class tileBehaviour : MonoBehaviour
     [SerializeField] Sprite neutral, flag, bomb, clicked;
 
     AudioSource _audioSrc;
-    [SerializeField] AudioClip lclick, rclick;
+    [SerializeField] AudioClip lclick, rclick, rclikcReload, mclick;
 
     SpriteRenderer spriteRenderer;
 
@@ -31,6 +31,8 @@ public class tileBehaviour : MonoBehaviour
 
     //SpriteRenderer _tempSpriteRenderer;
 
+    bool _midClick = false;
+
     TextMeshPro txt;
     // Start is called before the first frame update
     void Start()
@@ -38,7 +40,7 @@ public class tileBehaviour : MonoBehaviour
         spawnerTile = GameObject.Find("TileSpawner").GetComponent<SpawnerTile>();
         txt = GetComponentInChildren<TextMeshPro>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-       _audioSrc = GetComponentInChildren<AudioSource>();
+       _audioSrc = GetComponent<AudioSource>();
     }
     public void SetNbBombs(int x, int y, Vector2 size)
     {
@@ -91,9 +93,11 @@ public class tileBehaviour : MonoBehaviour
             WinLose.isPlaying = true;   // Starts considering player actions
         }
 
-        _audioSrc.PlayOneShot(lclick);
 
         if (spriteRenderer.sprite != neutral) return;
+        if(!_midClick) 
+            _audioSrc.PlayOneShot(lclick);
+        _midClick = false;
         if (_isBomb)
         {
             WinLose.isPlaying = false;   // Stop considering player actions 
@@ -169,9 +173,16 @@ public class tileBehaviour : MonoBehaviour
 
     public void RightClick()
     {
-        if (spriteRenderer.sprite == flag) spriteRenderer.sprite = neutral;
-        else if (spriteRenderer.sprite == neutral) spriteRenderer.sprite = flag;
-        _audioSrc.PlayOneShot(rclick);
+        if (spriteRenderer.sprite == flag)
+        {
+            spriteRenderer.sprite = neutral;
+            _audioSrc.PlayOneShot(rclikcReload);
+        }
+        else if (spriteRenderer.sprite == neutral)
+        {
+            spriteRenderer.sprite = flag;
+            _audioSrc.PlayOneShot(rclick);
+        }
     }
 
     public void MiddleClickPress()
@@ -187,12 +198,18 @@ public class tileBehaviour : MonoBehaviour
                     flagInNeighbour++;
                 }
             }
-
+            bool one = false;
             foreach (GameObject go in Neighbour)
             {
                 tileBehaviour tilebehaviour = go.GetComponent<tileBehaviour>();
                 if (flagInNeighbour == numberBombs && go.GetComponent<SpriteRenderer>().sprite == tilebehaviour.neutral)
                 {
+                    if(!one)
+                    {
+                        _audioSrc.PlayOneShot(mclick);
+                        _midClick = true;
+                        one = true;
+                    }
                     tilebehaviour.LeftClicked();
                 }
             }

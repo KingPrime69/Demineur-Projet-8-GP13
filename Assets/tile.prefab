@@ -104,11 +104,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numberBombs: 0
   neutral: {fileID: 21300000, guid: ee60b5525e30a6e4b8a03fb9a25db896, type: 3}
-  flag: {fileID: 21300000, guid: 83ca1b0b5df36f34186121d5219e6490, type: 3}
-  bomb: {fileID: 21300000, guid: 86b8807ec847db34c8e15b2df118d863, type: 3}
+  flag: {fileID: 21300000, guid: 643c158a9afed584baa40a613fa3b230, type: 3}
+  bomb: {fileID: 21300000, guid: 8fd8368d340f38d46b975bdad8a88633, type: 3}
   clicked: {fileID: 21300000, guid: aab72a2893def874aacabb529d9976be, type: 3}
-  lclick: {fileID: 8300000, guid: b6fe8c69cc599124ea58d5ab68a8be81, type: 3}
-  rclick: {fileID: 8300000, guid: 6da2fecaf3cc95b47932c85e2e10b6b2, type: 3}
+  lclick: {fileID: 8300000, guid: ee04c3ac37907c947a6b0c326f308777, type: 3}
+  rclick: {fileID: 8300000, guid: ea00fd51f7c719d4d8826e1fdba95e62, type: 3}
+  rclikcReload: {fileID: 8300000, guid: 147aff7062ab1e74a84d0ec8c06f00b7, type: 3}
+  mclick: {fileID: 8300000, guid: e2d82511d497d9e4a8b79c80e1ee4084, type: 3}
 --- !u!114 &-610417166459864562
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -249,7 +251,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 24300002, guid: a9cd8f532ae853140b642340440a0ef1, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.8
   m_Pitch: 1
   Loop: 0
   Mute: 0
