@@ -16,29 +16,27 @@ public class MainMenu : MonoBehaviour
     {
         Application.Quit();
     }
-    [SerializeField] TMP_Dropdown dropDown;
+    [SerializeField] TMP_Dropdown _dropDown;
 
 
     public void OnDropDownChange()
     {
-        switch (dropDown.value)
+        switch (_dropDown.value)
         {
             case 0:
-                //10 8 
                 Difficulty.Size = new Vector2Int(10, 8);
                 Difficulty.nbBombs = 10;
                 break;
             case 1:
-                //18 14
                 Difficulty.Size = new Vector2Int(18, 14);
                 Difficulty.nbBombs = 40;
                 break;
             case 2:
-                //24 20
                 Difficulty.Size = new Vector2Int(24, 20);
                 Difficulty.nbBombs = 99;
                 break;
         }
+        Difficulty.nbFlags = Difficulty.nbBombs;
     }
 }
 
@@ -47,6 +45,7 @@ public static class Difficulty
     public static Vector2Int Size = new Vector2Int(10, 8);
     public static int nbBombs = 10;
     public static int nbReveal = 0;
+    public static int nbFlags = nbBombs;
 
 }
 

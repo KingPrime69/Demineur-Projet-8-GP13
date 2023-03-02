@@ -6,13 +6,15 @@ using TMPro;
 
 public class TimerScript : MonoBehaviour
 {
+    public TMPro.TMP_Text timeText;
+
+
     private void Start()
     {
         WinLose.timeValue = 0;
         WinLose.isPlaying = false;
         WinLose.isBombed = false;
     }
-    public TMPro.TMP_Text timeText;
     // Update is called once per frame
     void Update()
     {

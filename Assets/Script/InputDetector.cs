@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.SocialPlatforms.Impl;
 
-public class ClickDetector : MonoBehaviour
+public class InputDetector : MonoBehaviour
 {
     public Vector2 WorldPosition { get; private set; }
     public event Action LeftMouseClicked;
@@ -20,20 +20,20 @@ public class ClickDetector : MonoBehaviour
         Hover.Invoke();
     }
 
-    private void OnLeftMouseClick(InputValue _)
+    void OnLeftMouseClick(InputValue _)
     {
         LeftMouseClicked?.Invoke();
     }
 
-    private void OnRightMouseClick(InputValue _)
+    void OnRightMouseClick(InputValue _)
     {
         RightMouseClicked?.Invoke();
     }
-    private void OnMiddleMouseClickPress(InputValue _)
+    void OnMiddleMouseClickPress(InputValue _)
     {
         MiddleMouseClickedPressed?.Invoke();
     }
-    private void OnMiddleMouseClickRelease(InputValue _)
+    void OnMiddleMouseClickRelease(InputValue _)
     {
         MiddleMouseClickedReleased?.Invoke();
     }

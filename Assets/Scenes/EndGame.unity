@@ -1136,17 +1136,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 842852652}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2037770943}
-  m_RootOrder: 4
+  m_Father: {fileID: 1615597003}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 84.7}
+  m_AnchoredPosition: {x: 6.0651, y: 88.624}
   m_SizeDelta: {x: 305.9301, y: 87.2484}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &842852654
@@ -1258,9 +1258,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75ef63c806aef814d95eb2a82bfb018b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  txt: {fileID: 842852654}
-  win: {fileID: 8300000, guid: 9c7f167d5c16c9a479dc85dfa7413b30, type: 3}
-  loose: {fileID: 8300000, guid: 19b2ee276775ddd4f842228e056638d5, type: 3}
+  _txt: {fileID: 842852654}
+  _win: {fileID: 8300000, guid: 9c7f167d5c16c9a479dc85dfa7413b30, type: 3}
+  _loose: {fileID: 8300000, guid: 19b2ee276775ddd4f842228e056638d5, type: 3}
 --- !u!82 &842852657
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1270,7 +1270,7 @@ AudioSource:
   m_GameObject: {fileID: 842852652}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: a9cd8f532ae853140b642340440a0ef1, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 0.3
@@ -1928,7 +1928,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Minesweeper
+  m_text: Spikesweeper
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1955,8 +1955,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 34
+  m_fontSizeBase: 34
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2115,6 +2115,7 @@ RectTransform:
   - {fileID: 1082216471}
   - {fileID: 376110455}
   - {fileID: 2112368935}
+  - {fileID: 842852653}
   m_Father: {fileID: 2037770943}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2135,7 +2136,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d82ed9f188c8e47499538e3ec029e88f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dropDown: {fileID: 1082216472}
+  _dropDown: {fileID: 1082216472}
 --- !u!1 &1680506129
 GameObject:
   m_ObjectHideFlags: 0
@@ -2685,7 +2686,6 @@ RectTransform:
   - {fileID: 1706058764}
   - {fileID: 1463363112}
   - {fileID: 1615597003}
-  - {fileID: 842852653}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

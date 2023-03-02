@@ -1,24 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
-public class GameMusic : MonoBehaviour
+public class BombCount : MonoBehaviour
 {
-
-    //[SerializeField] AudioClip music;
-
-    AudioSource _audioSrc;
+    TextMeshProUGUI _txtmesh;
 
     // Start is called before the first frame update
     void Start()
     {
-        _audioSrc = GetComponent<AudioSource>();
-        _audioSrc.Play();
+        _txtmesh = GetComponent<TextMeshProUGUI>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        _txtmesh.text = Difficulty.nbFlags.ToString();
     }
 }

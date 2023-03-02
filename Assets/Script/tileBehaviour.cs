@@ -14,18 +14,18 @@ public class tileBehaviour : MonoBehaviour
     public int numberBombs;
     public bool[,] array { get; set; }
 
-    [SerializeField] Sprite neutral, flag, bomb, clicked;
+    [SerializeField] Sprite _neutral, _flag, _bomb, _clicked;
 
     AudioSource _audioSrc;
-    [SerializeField] AudioClip lclick, rclick, rclikcReload, mclick;
+    [SerializeField] AudioClip _lclick, _rclick, _rclikcReload, _mclick;
 
-    SpriteRenderer spriteRenderer;
+    SpriteRenderer _spriteRenderer;
 
-    SpawnerTile spawnerTile;
+    SpawnerTile _spawnerTile;
 
-    Vector2Int pos;
+    Vector2Int _pos;
 
-    List<GameObject> Neighbour = new List<GameObject>();
+    List<GameObject> _Neighbour = new List<GameObject>();
 
     List<GameObject> _Bombs = new List<GameObject>();
 
@@ -33,18 +33,19 @@ public class tileBehaviour : MonoBehaviour
 
     bool _midClick = false;
 
-    TextMeshPro txt;
+    TextMeshPro _txt;
     // Start is called before the first frame update
     void Start()
     {
-        spawnerTile = GameObject.Find("TileSpawner").GetComponent<SpawnerTile>();
-        txt = GetComponentInChildren<TextMeshPro>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        _spawnerTile = GameObject.Find("TileSpawner").GetComponent<SpawnerTile>();
+        _txt = GetComponentInChildren<TextMeshPro>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
        _audioSrc = GetComponent<AudioSource>();
     }
+
     public void SetNbBombs(int x, int y, Vector2 size)
     {
-        pos.x = x; pos.y = y;
+        _pos.x = x; _pos.y = y;
         for (int i = x - 1; i <= x + 1; i++)
         {
             for (int j = y - 1; j <= y + 1; j++)
@@ -59,13 +60,13 @@ public class tileBehaviour : MonoBehaviour
 
     public void SetNeighbours(Vector2 size, GameObject[,] tileArray)
     {
-        for (int i = pos.x - 1; i <= pos.x + 1; i++)
+        for (int i = _pos.x - 1; i <= _pos.x + 1; i++)
         {
-            for (int j = pos.y - 1; j <= pos.y + 1; j++)
+            for (int j = _pos.y - 1; j <= _pos.y + 1; j++)
             {
-                if ((i != pos.x || j != pos.y) && (i >= 0 && j >= 0) && (i < (int)size.x && j < (int)size.y))
+                if ((i != _pos.x || j != _pos.y) && (i >= 0 && j >= 0) && (i < (int)size.x && j < (int)size.y))
                 {
-                    Neighbour.Add(tileArray[i, j]);
+                    _Neighbour.Add(tileArray[i, j]);
                 }
             }
         }
@@ -73,42 +74,42 @@ public class tileBehaviour : MonoBehaviour
 
     public void HoverStart()
     {
-        if (spriteRenderer != null)
-            spriteRenderer.color = Color.white;
+        if (_spriteRenderer != null)
+            _spriteRenderer.color = Color.white;
     }
 
     public void HoverEnd()
     {
-        if (spriteRenderer != null)
-            spriteRenderer.color = new Color(168f / 255f, 168f / 255f, 168f / 255f);
+        if (_spriteRenderer != null)
+            _spriteRenderer.color = new Color(168f / 255f, 168f / 255f, 168f / 255f);
     }
 
 
     public void LeftClicked()
     {
-        if (!spawnerTile.firstClick)
+        if (!_spawnerTile.firstClick)
         {
-            spawnerTile.InitBomb(array, pos);
-            spawnerTile.firstClick = true;
+            _spawnerTile.InitBomb(array, _pos);
+            _spawnerTile.firstClick = true;
             WinLose.isPlaying = true;   // Starts considering player actions
         }
 
 
-        if (spriteRenderer.sprite != neutral) return;
+        if (_spriteRenderer.sprite != _neutral) return;
         if(!_midClick) 
-            _audioSrc.PlayOneShot(lclick);
+            _audioSrc.PlayOneShot(_lclick);
         _midClick = false;
         if (_isBomb)
         {
             WinLose.isPlaying = false;   // Stop considering player actions 
             WinLose.isBombed = true;     // Indicates that player has lost
-            spriteRenderer.sprite = bomb;
+            _spriteRenderer.sprite = _bomb;
             StartCoroutine(BombReveal(gameObject, 0));
-            foreach (GameObject go in spawnerTile.tileArray)
+            foreach (GameObject go in _spawnerTile.tileArray)
             {
                 if (go.GetComponent<tileBehaviour>()._isBomb)
                 {
-                    if (go.GetComponent<SpriteRenderer>().sprite != go.GetComponent<tileBehaviour>().flag)
+                    if (go.GetComponent<SpriteRenderer>().sprite != go.GetComponent<tileBehaviour>()._flag)
                         _Bombs.Add(go);
                     //FloodFillBomb(gameObject);
                     Shuffle<GameObject>();
@@ -119,7 +120,7 @@ public class tileBehaviour : MonoBehaviour
             foreach(GameObject go in _Bombs)
             {
                 i++;
-                if (go.GetComponent<tileBehaviour>().pos == pos) continue;
+                if (go.GetComponent<tileBehaviour>()._pos == _pos) continue;
                 StartCoroutine(BombReveal(go, i));
             }
             foreach (GameObject go in _Bombs)
@@ -142,10 +143,10 @@ public class tileBehaviour : MonoBehaviour
                 SceneManager.LoadScene("EndGame");
             }
 
-            spriteRenderer.sprite = clicked;
+            _spriteRenderer.sprite = _clicked;
             if (numberBombs > 0)
             {
-                txt.text = numberBombs.ToString();
+                _txt.text = numberBombs.ToString();
             }
             else
             {
@@ -155,7 +156,7 @@ public class tileBehaviour : MonoBehaviour
         }
     }
 
-    private IEnumerator LoadEndScene(float time)
+    IEnumerator LoadEndScene(float time)
     {
         yield return new WaitForSeconds(time);
         WinLose.winLoseTitle = "Defeat";
@@ -163,50 +164,52 @@ public class tileBehaviour : MonoBehaviour
         SceneManager.LoadScene("EndGame");
     }
 
-    private IEnumerator BombReveal(GameObject go, int i)
+    IEnumerator BombReveal(GameObject go, int i)
     {
-        yield return new WaitForSeconds((5f / spawnerTile.nbBombs) * i);
+        yield return new WaitForSeconds((5f / _spawnerTile.nbBombs) * i);
 
-        go.GetComponent<SpriteRenderer>().sprite = go.GetComponent<tileBehaviour>().bomb;
+        go.GetComponent<SpriteRenderer>().sprite = go.GetComponent<tileBehaviour>()._bomb;
         go.transform.GetChild(1).gameObject.SetActive(true);
     }
 
     public void RightClick()
     {
-        if (spriteRenderer.sprite == flag)
+        if (_spriteRenderer.sprite == _flag)
         {
-            spriteRenderer.sprite = neutral;
-            _audioSrc.PlayOneShot(rclikcReload);
+            _spriteRenderer.sprite = _neutral;
+            _audioSrc.PlayOneShot(_rclikcReload);
+            Difficulty.nbFlags++;
         }
-        else if (spriteRenderer.sprite == neutral)
+        else if (_spriteRenderer.sprite == _neutral)
         {
-            spriteRenderer.sprite = flag;
-            _audioSrc.PlayOneShot(rclick);
+            _spriteRenderer.sprite = _flag;
+            _audioSrc.PlayOneShot(_rclick);
+            Difficulty.nbFlags--;
         }
     }
 
     public void MiddleClickPress()
     {
-        if (spriteRenderer.sprite == clicked)
+        if (_spriteRenderer.sprite == _clicked)
         {
             int flagInNeighbour = 0;
-            foreach (GameObject go in Neighbour)
+            foreach (GameObject go in _Neighbour)
             {
                 tileBehaviour tilebehaviour = go.GetComponent<tileBehaviour>();
-                if (go.GetComponent<SpriteRenderer>().sprite == tilebehaviour.flag)
+                if (go.GetComponent<SpriteRenderer>().sprite == tilebehaviour._flag)
                 {
                     flagInNeighbour++;
                 }
             }
             bool one = false;
-            foreach (GameObject go in Neighbour)
+            foreach (GameObject go in _Neighbour)
             {
                 tileBehaviour tilebehaviour = go.GetComponent<tileBehaviour>();
-                if (flagInNeighbour == numberBombs && go.GetComponent<SpriteRenderer>().sprite == tilebehaviour.neutral)
+                if (flagInNeighbour == numberBombs && go.GetComponent<SpriteRenderer>().sprite == tilebehaviour._neutral)
                 {
                     if(!one)
                     {
-                        _audioSrc.PlayOneShot(mclick);
+                        _audioSrc.PlayOneShot(_mclick);
                         _midClick = true;
                         one = true;
                     }
@@ -215,20 +218,20 @@ public class tileBehaviour : MonoBehaviour
             }
         }
 
-        if (spriteRenderer.sprite == neutral) spriteRenderer.color = Color.white;
-        foreach (GameObject go in Neighbour)
+        if (_spriteRenderer.sprite == _neutral) _spriteRenderer.color = Color.white;
+        foreach (GameObject go in _Neighbour)
         {
-            if (go.GetComponent<SpriteRenderer>().sprite == neutral) go.GetComponent<SpriteRenderer>().color = Color.white;
+            if (go.GetComponent<SpriteRenderer>().sprite == _neutral) go.GetComponent<SpriteRenderer>().color = Color.white;
         }
 
     }
 
     public void MiddleClickRelease()
     {
-        if (spriteRenderer.sprite == neutral) spriteRenderer.color = new Color(168f / 255f, 168f / 255f, 168f / 255f);
-        foreach (GameObject go in Neighbour)
+        if (_spriteRenderer.sprite == _neutral) _spriteRenderer.color = new Color(168f / 255f, 168f / 255f, 168f / 255f);
+        foreach (GameObject go in _Neighbour)
         {
-            if (go.GetComponent<SpriteRenderer>().sprite == neutral) go.GetComponent<SpriteRenderer>().color = new Color(168f / 255f, 168f / 255f, 168f / 255f);
+            if (go.GetComponent<SpriteRenderer>().sprite == _neutral) go.GetComponent<SpriteRenderer>().color = new Color(168f / 255f, 168f / 255f, 168f / 255f);
         }
     }
 
@@ -239,22 +242,22 @@ public class tileBehaviour : MonoBehaviour
 
     void FloodFill(GameObject n)
     {
-        foreach (GameObject go in n.GetComponent<tileBehaviour>().Neighbour)
+        foreach (GameObject go in n.GetComponent<tileBehaviour>()._Neighbour)
         {
             tileBehaviour tilebehaviour = go.GetComponent<tileBehaviour>();
 
 
-            if (tilebehaviour.numberBombs == 0 && !tilebehaviour._isBomb && go.GetComponent<SpriteRenderer>().sprite == tilebehaviour.neutral)
+            if (tilebehaviour.numberBombs == 0 && !tilebehaviour._isBomb && go.GetComponent<SpriteRenderer>().sprite == tilebehaviour._neutral)
             {
-                go.GetComponent<SpriteRenderer>().sprite = clicked;
+                go.GetComponent<SpriteRenderer>().sprite = _clicked;
                 Difficulty.nbReveal++;
                 FloodFill(go);
             }
-            else if (tilebehaviour.numberBombs > 0 && go.GetComponent<SpriteRenderer>().sprite == tilebehaviour.neutral)
+            else if (tilebehaviour.numberBombs > 0 && go.GetComponent<SpriteRenderer>().sprite == tilebehaviour._neutral)
             {
-                go.GetComponent<SpriteRenderer>().sprite = clicked;
+                go.GetComponent<SpriteRenderer>().sprite = _clicked;
                 Difficulty.nbReveal++;
-                tilebehaviour.txt.text = tilebehaviour.numberBombs.ToString();
+                tilebehaviour._txt.text = tilebehaviour.numberBombs.ToString();
             }
         }
     }
