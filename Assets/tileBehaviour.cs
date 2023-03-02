@@ -36,7 +36,6 @@ public class tileBehaviour : MonoBehaviour
         spawnerTile = GameObject.Find("TileSpawner").GetComponent<SpawnerTile>();
         txt = GetComponentInChildren<TextMeshPro>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-
     }
     public void SetNbBombs(int x, int y, Vector2 size)
     {
@@ -91,7 +90,7 @@ public class tileBehaviour : MonoBehaviour
         if (_isBomb)
         {
             spriteRenderer.sprite = bomb;
-            gameObject.transform.GetChild(1).gameObject.SetActive(true);
+            StartCoroutine(BombReveal(gameObject, 0));
             foreach (GameObject go in spawnerTile.tileArray)
             {
                 if (go.GetComponent<tileBehaviour>()._isBomb)
