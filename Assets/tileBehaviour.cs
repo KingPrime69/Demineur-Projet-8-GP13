@@ -95,8 +95,8 @@ public class tileBehaviour : MonoBehaviour
             {
                 if (go.GetComponent<tileBehaviour>()._isBomb)
                 {
-
-                    _Bombs.Add(go);
+                    if (go.GetComponent<SpriteRenderer>().sprite != go.GetComponent<tileBehaviour>().flag)
+                        _Bombs.Add(go);
                     //FloodFillBomb(gameObject);
                     Shuffle<GameObject>();
                 }
