@@ -38,8 +38,6 @@ public class SettingsMenu : MonoBehaviour
                 resolutionList.Add(resolutionOption);
                 resolutionList2.Add(resolutions[i]);
             }
-            //if (resolutions[i].width == Screen.width &&       
-            //  resolutions[i].height == Screen.height)
             if (resolutions[i].Equals(Screen.currentResolution))       // Checks if the resolution being added corresponds to the screen resolution or not
             {
                 currentResolution = i;      // currentResolution takes the resolution it matched

@@ -54,4 +54,6 @@ public static class WinLose
 {
     public static string winLoseTitle = "Victory !";
     public static float timeValue = 0;
+    public static bool isPlaying = false;
+    public static bool isBombed = false;
 }

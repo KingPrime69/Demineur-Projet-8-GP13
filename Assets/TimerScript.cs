@@ -9,14 +9,19 @@ public class TimerScript : MonoBehaviour
     private void Start()
     {
         WinLose.timeValue = 0;
+        WinLose.isPlaying = false;
+        WinLose.isBombed = false;
     }
     public TMPro.TMP_Text timeText;
     // Update is called once per frame
     void Update()
     {
-        WinLose.timeValue += Time.deltaTime;
+        if (WinLose.isPlaying)
+        { 
+            WinLose.timeValue += Time.deltaTime;
 
-        DisplayTimeElapsed(WinLose.timeValue);
+            DisplayTimeElapsed(WinLose.timeValue);
+        }
     }
 
     void DisplayTimeElapsed(float timeToDisplay)

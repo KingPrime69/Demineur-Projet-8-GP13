@@ -85,10 +85,13 @@ public class tileBehaviour : MonoBehaviour
         {
             spawnerTile.InitBomb(array, pos);
             spawnerTile.firstClick = true;
+            WinLose.isPlaying = true;   // Starts considering player actions
         }
         if (spriteRenderer.sprite != neutral) return;
         if (_isBomb)
         {
+            WinLose.isPlaying = false;   // Stop considering player actions 
+            WinLose.isBombed = true;     // Indicates that player has lost
             spriteRenderer.sprite = bomb;
             StartCoroutine(BombReveal(gameObject, 0));
             foreach (GameObject go in spawnerTile.tileArray)
@@ -146,7 +149,7 @@ public class tileBehaviour : MonoBehaviour
     {
         yield return new WaitForSeconds(time);
         WinLose.winLoseTitle = "Defeat";
-        Difficulty.nbReveal = 0;
+
         SceneManager.LoadScene("EndGame");
     }
 
