@@ -355,7 +355,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 474f800316f59f84fb0841f70924accc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeValue: 0
   timeText: {fileID: 552151343}
 --- !u!1 &908337329
 GameObject:
@@ -681,6 +680,7 @@ GameObject:
   - component: {fileID: 2099734916}
   - component: {fileID: 2099734918}
   - component: {fileID: 2099734917}
+  - component: {fileID: 2099734919}
   m_Layer: 5
   m_Name: FlagCounter
   m_TagString: Untagged
@@ -805,6 +805,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2099734915}
   m_CullTransparentMesh: 1
+--- !u!114 &2099734919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2099734915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ca63bc67c8bac242a1665c66e1c62d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numberBombs: 0
+  neutral: {fileID: 0}
+  flag: {fileID: 0}
+  bomb: {fileID: 0}
+  clicked: {fileID: 0}
+  flagCounter: {fileID: 2099734917}
 --- !u!1 &2119212181
 GameObject:
   m_ObjectHideFlags: 0
@@ -836,6 +854,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _original: {fileID: 3502645040759214238, guid: 6ea8afd899152f148b81240df4e486c1, type: 3}
   _camera: {fileID: 519420028}
+  nbBombs: 0
   firstClick: 0
 --- !u!4 &2119212183
 Transform:

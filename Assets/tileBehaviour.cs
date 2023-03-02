@@ -30,6 +30,9 @@ public class tileBehaviour : MonoBehaviour
     //SpriteRenderer _tempSpriteRenderer;
 
     TextMeshPro txt;
+
+    public TMPro.TMP_Text flagCounter;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -163,8 +166,19 @@ public class tileBehaviour : MonoBehaviour
 
     public void RightClick()
     {
-        if (spriteRenderer.sprite == flag) spriteRenderer.sprite = neutral;
-        else if (spriteRenderer.sprite == neutral) spriteRenderer.sprite = flag;
+        if (spriteRenderer.sprite == flag)
+        {
+            Difficulty.nbFlag++;
+            flagCounter.text = Difficulty.nbFlag.ToString();
+            spriteRenderer.sprite = neutral;
+
+        }
+        else if (spriteRenderer.sprite == neutral)
+        {
+            Difficulty.nbFlag--;
+            flagCounter.text = Difficulty.nbFlag.ToString();
+            spriteRenderer.sprite = flag;
+        }
     }
 
     public void MiddleClickPress()
